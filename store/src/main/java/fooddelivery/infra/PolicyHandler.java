@@ -22,5 +22,41 @@ public class PolicyHandler {
 
     @StreamListener(KafkaProcessor.INPUT)
     public void whatever(@Payload String eventString) {}
+
+    @StreamListener(
+        value = KafkaProcessor.INPUT,
+        condition = "headers['type']=='PaymentApproved'"
+    )
+    public void wheneverPaymentApproved_ReceivedOrderInformation(
+        @Payload PaymentApproved paymentApproved
+    ) {
+        PaymentApproved event = paymentApproved;
+        System.out.println(
+            "\n\n##### listener ReceivedOrderInformation : " +
+            paymentApproved +
+            "\n\n"
+        );
+
+        // Sample Logic //
+        OrderManagement.receivedOrderInformation(event);
+    }
+
+    @StreamListener(
+        value = KafkaProcessor.INPUT,
+        condition = "headers['type']=='PaymentCanceled'"
+    )
+    public void wheneverPaymentCanceled_ReceievcedCancleOrderInformation(
+        @Payload PaymentCanceled paymentCanceled
+    ) {
+        PaymentCanceled event = paymentCanceled;
+        System.out.println(
+            "\n\n##### listener ReceievcedCancleOrderInformation : " +
+            paymentCanceled +
+            "\n\n"
+        );
+
+        // Sample Logic //
+        OrderManagement.receievcedCancleOrderInformation(event);
+    }
 }
 //>>> Clean Arch / Inbound Adaptor

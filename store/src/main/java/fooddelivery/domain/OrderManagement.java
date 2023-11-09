@@ -1,6 +1,7 @@
 package fooddelivery.domain;
 
 import fooddelivery.StoreApplication;
+import fooddelivery.domain.Canceled;
 import fooddelivery.domain.DeliveryStarted;
 import java.time.LocalDate;
 import java.util.Date;
@@ -36,6 +37,9 @@ public class OrderManagement {
     public void onPostPersist() {
         DeliveryStarted deliveryStarted = new DeliveryStarted(this);
         deliveryStarted.publishAfterCommit();
+
+        Canceled canceled = new Canceled(this);
+        canceled.publishAfterCommit();
     }
 
     public static OrderManagementRepository repository() {
@@ -68,6 +72,36 @@ public class OrderManagement {
 
             DeliveryStarted deliveryStarted = new DeliveryStarted(orderManagement);
             deliveryStarted.publishAfterCommit();
+
+         });
+        */
+
+    }
+
+    //>>> Clean Arch / Port Method
+    //<<< Clean Arch / Port Method
+    public static void receievcedCancleOrderInformation(
+        PaymentCanceled paymentCanceled
+    ) {
+        //implement business logic here:
+
+        /** Example 1:  new item 
+        OrderManagement orderManagement = new OrderManagement();
+        repository().save(orderManagement);
+
+        Canceled canceled = new Canceled(orderManagement);
+        canceled.publishAfterCommit();
+        */
+
+        /** Example 2:  finding and process
+        
+        repository().findById(paymentCanceled.get???()).ifPresent(orderManagement->{
+            
+            orderManagement // do something
+            repository().save(orderManagement);
+
+            Canceled canceled = new Canceled(orderManagement);
+            canceled.publishAfterCommit();
 
          });
         */

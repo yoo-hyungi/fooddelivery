@@ -56,6 +56,8 @@ public class PaymentHistory {
 
         PaymentCanceled paymentCanceled = new PaymentCanceled(paymentHistory);
         paymentCanceled.publishAfterCommit();
+        PaymentCanceled paymentCanceled = new PaymentCanceled(paymentHistory);
+        paymentCanceled.publishAfterCommit();
         */
 
         /** Example 2:  finding and process
@@ -65,6 +67,8 @@ public class PaymentHistory {
             paymentHistory // do something
             repository().save(paymentHistory);
 
+            PaymentCanceled paymentCanceled = new PaymentCanceled(paymentHistory);
+            paymentCanceled.publishAfterCommit();
             PaymentCanceled paymentCanceled = new PaymentCanceled(paymentHistory);
             paymentCanceled.publishAfterCommit();
 

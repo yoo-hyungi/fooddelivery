@@ -37,6 +37,23 @@ public class PolicyHandler {
 
     @StreamListener(
         value = KafkaProcessor.INPUT,
+        condition = "headers['type']=='OrderCanceled'"
+    )
+    public void wheneverOrderCanceled_KakaoTalkNotification(
+        @Payload OrderCanceled orderCanceled
+    ) {
+        OrderCanceled event = orderCanceled;
+        System.out.println(
+            "\n\n##### listener KakaoTalkNotification : " +
+            orderCanceled +
+            "\n\n"
+        );
+        // Sample Logic //
+
+    }
+
+    @StreamListener(
+        value = KafkaProcessor.INPUT,
         condition = "headers['type']=='DeliveryStarted'"
     )
     public void wheneverDeliveryStarted_KakaoTalkNotification(
@@ -54,16 +71,14 @@ public class PolicyHandler {
 
     @StreamListener(
         value = KafkaProcessor.INPUT,
-        condition = "headers['type']=='OrderCanceled'"
+        condition = "headers['type']=='Canceled'"
     )
-    public void wheneverOrderCanceled_KakaoTalkNotification(
-        @Payload OrderCanceled orderCanceled
+    public void wheneverCanceled_KakaoTalkNotification(
+        @Payload Canceled canceled
     ) {
-        OrderCanceled event = orderCanceled;
+        Canceled event = canceled;
         System.out.println(
-            "\n\n##### listener KakaoTalkNotification : " +
-            orderCanceled +
-            "\n\n"
+            "\n\n##### listener KakaoTalkNotification : " + canceled + "\n\n"
         );
         // Sample Logic //
 

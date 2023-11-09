@@ -7,16 +7,11 @@ import lombok.*;
 
 @Data
 @ToString
-public class OrderCanceled extends AbstractEvent {
+public class PaymentCanceled extends AbstractEvent {
 
     private Long id;
     private String userId;
     private Long orderId;
-    private String foodname;
-    private Integer qty;
-    private Date orderDate;
-    private String address;
-    private String status;
-    private Long foodid;
     private Long price;
+    private String status;
 }
